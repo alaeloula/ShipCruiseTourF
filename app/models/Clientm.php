@@ -8,7 +8,14 @@ class Clientm{
     public function getCroisiere()
     {
         
-        $this->db->query('SELECT * FROM `cr_cl`');
+        $this->db->query('SELECT * FROM `cr_cl`where `date_depart`>= NOW()');
+        $results = $this->db->resultSet();
+        return $results;
+    }
+    public function getCroisiere2()
+    {
+        $dt = date('Y-m-d');
+        $this->db->query("SELECT * FROM `cr_cl` WHERE date_depart <=$dt" );
         $results = $this->db->resultSet();
         return $results;
     }
@@ -29,7 +36,7 @@ class Clientm{
     public function getCroisiereF3($id)
     {
         
-        $this->db->query("SELECT * FROM `cr_cl` WHERE month(date_depart)=$id");
+        $this->db->query("SELECT * FROM `cr_cl` WHERE LEFT(date_depart,7) = '$id'");
         $results = $this->db->resultSet();
         return $results;
     }
@@ -82,6 +89,12 @@ class Clientm{
         } else {
             return false;
         }
+    }
+    public function getUsers()
+    {
+        $this->db->query('SELECT * FROM user');
+        $results = $this->db->resultSet();
+        return $results;
     }
     
 }

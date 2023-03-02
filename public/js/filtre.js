@@ -39,7 +39,7 @@ $('#port').on('change', function () {
                 <div class=" col-md-5 p-3">
                     <p class="nuit">${element.nbr_nuit}Nuits</p>
                     <h4 class="title_vg">${element.title}</h4>
-                    <p><img width="30px" height="30px" src="<?= URLROOT . "/uploads/" . $key->image ?>" alt="cruise"> <?= $key->nom  ?></p>
+                    <p><img width="30px" height="30px" src="http://localhost/ShipCruiseTour/uploads/${element.image}" alt="cruise"> <?= $key->nom  ?></p>
                     <p><span class="depart_dep">Port de départ :</span> ${element.portdep}</p>
                 </div>
                 <div class="col-md-3 text-center p-3" id="prix_div">
@@ -84,7 +84,7 @@ $('#navire').on('change', function () {
                     <div class=" col-md-5 p-3">
                         <p class="nuit">${element.nbr_nuit}Nuits</p>
                         <h4 class="title_vg">${element.title}</h4>
-                        <p><img width="30px" height="30px" src="<?= URLROOT . "/uploads/" . $key->image ?>" alt="cruise"> <?= $key->nom  ?></p>
+                        <p><img width="30px" height="30px" src="http://localhost/ShipCruiseTour/uploads/${element.image}" alt="cruise"> <?= $key->nom  ?></p>
                         <p><span class="depart_dep">Port de départ :</span> ${element.portdep}</p>
                     </div>
                     <div class="col-md-3 text-center p-3" id="prix_div">
@@ -113,12 +113,13 @@ $('#date').on('change', function () {
         console.log(heho)
         location.reload ()
     }else{
-
+        console.log($('#date').val());
         $.ajax({
             url: 'http://localhost/ShipCruiseTour/client/filterDate/' + $('#date').val() + '',
             type: 'POST',
             contentType: false,
             cache: false,
+            
             success: function (res) {
                 let data = JSON.parse(res);
                 console.log(data)
@@ -131,7 +132,7 @@ $('#date').on('change', function () {
                     <div class=" col-md-5 p-3">
                         <p class="nuit">${element.nbr_nuit}Nuits</p>
                         <h4 class="title_vg">${element.title}</h4>
-                        <p><img width="30px" height="30px" src="<?= URLROOT . "/uploads/" . $key->image ?>" alt="cruise"> <?= $key->nom  ?></p>
+                        <p><img width="30px" height="30px" src="http://localhost/ShipCruiseTour/uploads/${element.image}" alt="cruise"> <?= $key->nom  ?></p>
                         <p><span class="depart_dep">Port de départ :</span> ${element.portdep}</p>
                     </div>
                     <div class="col-md-3 text-center p-3" id="prix_div">

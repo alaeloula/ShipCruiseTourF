@@ -9,13 +9,14 @@ class client extends Controller
 
   public function index()
   {
-
+    // header('Access-Control-Allow-Origin: *');
     $croisiere = $this->clientModel->getCroisiere();
     $traget = $this->clientModel->gettragetvs();
     $data = [
       'croisieres' => $croisiere,
       'traget' => $traget
     ];
+    // echo json_encode($data);
     $this->view('client/index', $data);
   }
   public function getBooking($id)
@@ -140,6 +141,23 @@ class client extends Controller
     echo json_encode($data);
     
    
+  }
+
+
+  public function getUser()
+  {
+    header("Access-Control-Allow-Origin: *");
+    header('Content-Type: application/json ; charset=utf-8');
+    header("Access-Control-Allow-Methods:"); 
+    header("Access-Control-Allow-Headers: *");
+
+   $users=$this->clientModel->getUsers();
+    $data = [
+      'users' => $users,
+      
+    ];
+   
+    echo json_encode($data);
   }
   
 }
