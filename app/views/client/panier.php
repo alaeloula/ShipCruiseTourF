@@ -2,6 +2,9 @@
 <div class="row croisiere mb-5">
     <?php
     flash('reservationdelete_message');
+    flash('reservationdeleteer_message');
+    flash('full');
+    
     echo $_SESSION['user_name']
     ?>
 

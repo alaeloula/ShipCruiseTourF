@@ -10,7 +10,7 @@ class client extends Controller
   public function index()
   {
     // header('Access-Control-Allow-Origin: *');
-    $croisiere = $this->clientModel->getCroisiere();
+    $croisiere = $this->clientModel->getCroisiereee();
     $traget = $this->clientModel->gettragetvs();
     $data = [
       'croisieres' => $croisiere,
@@ -32,12 +32,21 @@ class client extends Controller
 
       ];
 
-      if ($this->clientModel->addResevation($data)) {
+      $max_capacity = $this->clientModel->maxcapacity($id);
+      $nombre_de_resrvation = $this->clientModel->nombre_de_resrvation($id);
+     $test=  $max_capacity->MAX  - $nombre_de_resrvation->nbrR;
+      if ($test>0){
+        if ($this->clientModel->addResevation($data)) {
         flash('reservationadd_message', 'new reservation added');
         redirect('client/index/');
       } else {
         die("something went wrong");
       }
+      }else{
+        flash('full', ' we are sorry the  cruse is  full',"alert alert-warning");
+        redirect('client/index/');
+      }
+      
     } else {
 
       $detail = $this->clientModel->getDetail($id);
@@ -94,9 +103,9 @@ class client extends Controller
       }
     }else{
       
-      // flash('reservationdelete_message', ' reservation can\'t be deleted');
+      flash('reservationdeleteer_message', ' reservation can\'t be deleted',"alert alert-warning");
 
-      // $this->view('client/panier', $data);
+      $this->view('client/panier', $data);
       // exit;
     }
 

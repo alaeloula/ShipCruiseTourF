@@ -12,6 +12,27 @@ class Clientm{
         $results = $this->db->resultSet();
         return $results;
     }
+    public function getCroisiereee()
+    {
+        
+        $this->db->query('SELECT croisiere.*,navire.*,port.*,COUNT(id_ch)as totale ,Min(chambre.prix)as MINP FROM chambre join navire on chambre.id_navire = navire.id_n JOIN croisiere on croisiere.id_navire = navire.id_n JOIN port on port.id_p = croisiere.port_depart  where croisiere.date_depart>= NOW() GROUP by croisiere.id_croisiere');
+        $results = $this->db->resultSet();
+        return $results;
+    }
+    public function maxcapacity($id)
+    {
+        
+        $this->db->query("SELECT count(chambre.id_ch) as MAX from croisiere JOIN chambre ON chambre.id_navire=croisiere.id_navire where croisiere.id_croisiere=$id group BY croisiere .id_croisiere");
+        $results = $this->db->single();
+        return $results;
+    }
+    public function nombre_de_resrvation($id)
+    {
+        
+        $this->db->query("SELECT count(reservation.id_reserv) as nbrR FROM reservation WHERE reservation.id_croisiere=$id");
+        $results = $this->db->single();
+        return $results;
+    }
     public function getCroisiere2()
     {
         $dt = date('Y-m-d');

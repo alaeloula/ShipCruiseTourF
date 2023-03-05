@@ -1,5 +1,6 @@
 <?php require APPROOT . '/views/inc/header.php';
 flash('reservationadd_message');
+flash('full');
 ?>
 
 
@@ -15,7 +16,7 @@ flash('reservationadd_message');
                         <select class="form-control" name="port_depart" id="port" required>
                             <option>--Select--</option>
                             <?php foreach ($data['croisieres'] as $port) : ?>
-                                <option value="<?= $port->port_depart ?>"><?= $port->portdep ?></option>
+                                <option value="<?= $port->pays ?>"><?= $port->pays ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -52,7 +53,7 @@ flash('reservationadd_message');
                 <p class="nuit"><?= $key->nbr_nuit ?>Nuits</p>
                 <h4 class="title_vg"><?= $key->title ?></h4>
                 <p><img width="30px" height="30px" src="<?= URLROOT . "/uploads/" . $key->image ?>" alt="cruise"> <?= $key->nom  ?></p>
-                <p><span class="depart_dep">Port de départ :</span> <?= $key->portdep  ?> </p>
+                <p><span class="depart_dep">Port de départ :</span> <?= $key->pays  ?> </p>
                 <p><span class="depart_dep">L'escale à :</span>
 
                     <?php foreach ($data['traget'] as $key2) {
@@ -69,10 +70,11 @@ flash('reservationadd_message');
             </div>
             <div class="col-md-3 text-center p-3" id="prix_div">
 
-                <p class="prix"> <?= $key->prix  ?><span class="mad">MAD</span></p>
+                <p class="prix"> <?= $key->MINP ?><span class="mad">MAD</span></p>
                 <p class="mad">solo</p>
                 <a href="<?= URLROOT . "/client/getBooking/" . $key->id_croisiere ?>" value="<?= $key->id_croisiere ?>" class="btn btn-outline-primary mb-3">Réserver</a>
                 <p class="depart_dep"><?= $key->date_depart ?>
+                <p class="depart_dep">totale de place : <?= $key->totale ?>
                 <p>
             </div>
         </div>
